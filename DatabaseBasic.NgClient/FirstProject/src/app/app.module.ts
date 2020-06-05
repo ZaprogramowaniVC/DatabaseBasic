@@ -5,15 +5,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ContactComponent } from './contact/contact.component';
 import {FormsModule} from '@angular/forms';
-import {HttpClientModule} from '@angular/common/http'
-import { DataService } from './data.service';
-import { UserComponent } from './user/user.component';
+import {HttpClientModule} from '@angular/common/http';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     ContactComponent,
-    UserComponent,
   ],
   imports: [
     BrowserModule,
@@ -21,7 +19,7 @@ import { UserComponent } from './user/user.component';
     FormsModule,
     HttpClientModule
   ],
-  providers: [DataService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

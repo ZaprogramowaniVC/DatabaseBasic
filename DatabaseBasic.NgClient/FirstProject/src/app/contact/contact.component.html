@@ -1,16 +1,30 @@
-<p>contact works!</p>
-<p>Mam na imię {{imie}}</p>
-<button (click)='toggleImage()'>{{isImageVisible ? 'Hide' : 'Show'}} penguin</button>
-<button (click)='printFromInjectedService()'>Get message from service</button>
-<button (click)='twoWayBindingTextShow()'>Print Two Way binded text</button>
-<input [(ngModel)]="text">
-<div id="imageContainer" style="width: 180px; height: 250px; margin:10px;">
-  <img [src]='imgPath' *ngIf='isImageVisible' style="width: 100%; height: 100%;" />
-</div>
-<ul style="padding: 0px; margin: 0px;">
-  <li *ngFor="let number of myArray">
-    {{number}}
+<div class="lds-dual-ring" *ngIf="isLoading" ></div>
+<!--
+<ul style="padding: 0px; margin: 0px;" *ngIf="!isLoading">
+  <li *ngFor="let contact of contacts">
+    {{contact.name}}
   </li>
-</ul>
+</ul> -->
 
 
+<!-- <table *ngIf="!isLoading"> -->
+<table *ngIf="contacts$ | async as contacts">
+  <thead>
+      <tr>
+          <th>Id</th>
+          <th>Name</th>
+          <th>Surname</th>
+          <th>Phone number</th>
+          <th>Sex</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr  *ngFor="let contact of contacts">
+          <td>{{ contact.id }}</td>
+          <td>{{ contact.name }}</td>
+          <td>{{ contact.surname }}</td>
+          <td>{{ contact.phoneNumber }}</td>
+          <td>{{ contact.sex }}</td>
+      </tr>
+  </tbody>
+</table>

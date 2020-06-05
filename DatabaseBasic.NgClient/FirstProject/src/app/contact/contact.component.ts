@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ContactService } from 'src/app/service/contact.service';
+import { ContactService } from '../services/contact.service';
+import { Contact } from '../models/contact.model';
+import { SexEnum } from '../enums/sex.enum';
+import { Observable, of, pipe } from 'rxjs';
+import { tap, map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-contact',
@@ -8,31 +12,34 @@ import { ContactService } from 'src/app/service/contact.service';
 })
 export class ContactComponent implements OnInit {
 
-  imie = 'Kamil';
+  isLoading: boolean;
+  // contacts: Contact[];
+  contacts$: Observable<Contact[]>;
 
-  text = 'XxxxxxxX';
-
-  imgPath = '/assets/pobrane.jpg';
-
-  isImageVisible = true;
-
-  myArray = [1, 2, 3, 4, 5];
-
-  constructor(private contactService: ContactService) { }
+constructor(private contactService: ContactService) {}
 
   ngOnInit() {
+    var test = of(1, 2, 4, 5, 6);
+    test.pipe(
+      map( data => [data, data+1, data**2])
+    )
+    .subscribe(
+      data => console.log(data),
+      null,
+      null);
+
+
+    this.isLoading = true;
+    this.contacts$ = this.contactService.getContacts().pipe(
+      tap({complete: () => this.isLoading = false})
+    );
+
+    // this.contactService.getContacts().subscribe(
+    //   data => this.contacts = data,
+    //   error => console.log(error),
+    //   () => this.isLoading = false
+    // );
   }
 
-  toggleImage() {
-    this.isImageVisible = !this.isImageVisible;
-  }
-
-  twoWayBindingTextShow() {
-    alert(this.text);
-  }
-
-  printFromInjectedService() {
-    alert(this.contactService.TestMethod());
-  }
 
 }
