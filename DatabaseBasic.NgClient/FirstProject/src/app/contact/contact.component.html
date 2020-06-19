@@ -1,30 +1,26 @@
-<div class="lds-dual-ring" *ngIf="isLoading" ></div>
-<!--
-<ul style="padding: 0px; margin: 0px;" *ngIf="!isLoading">
-  <li *ngFor="let contact of contacts">
-    {{contact.name}}
-  </li>
-</ul> -->
-
-
-<!-- <table *ngIf="!isLoading"> -->
-<table *ngIf="contacts$ | async as contacts">
-  <thead>
-      <tr>
+<div class="container">
+  <div>
+    <div class="lds-dual-ring" *ngIf="isLoading"></div>
+    <table *ngIf="contacts$ | async as contacts">
+      <thead>
+        <tr>
           <th>Id</th>
           <th>Name</th>
           <th>Surname</th>
           <th>Phone number</th>
           <th>Sex</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr  *ngFor="let contact of contacts">
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let contact of contacts">
           <td>{{ contact.id }}</td>
           <td>{{ contact.name }}</td>
           <td>{{ contact.surname }}</td>
           <td>{{ contact.phoneNumber }}</td>
           <td>{{ contact.sex }}</td>
-      </tr>
-  </tbody>
-</table>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <app-contact-edit></app-contact-edit>
+</div>

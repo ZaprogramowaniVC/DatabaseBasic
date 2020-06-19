@@ -19,17 +19,8 @@ export class ContactComponent implements OnInit {
 constructor(private contactService: ContactService) {}
 
   ngOnInit() {
-    var test = of(1, 2, 4, 5, 6);
-    test.pipe(
-      map( data => [data, data+1, data**2])
-    )
-    .subscribe(
-      data => console.log(data),
-      null,
-      null);
-
-
     this.isLoading = true;
+
     this.contacts$ = this.contactService.getContacts().pipe(
       tap({complete: () => this.isLoading = false})
     );
